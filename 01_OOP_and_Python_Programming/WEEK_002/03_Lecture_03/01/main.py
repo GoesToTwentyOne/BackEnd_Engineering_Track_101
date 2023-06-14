@@ -16,12 +16,11 @@ class Cricketer(Person):
         print("I'm  Sakib I'm taking to anyone,Ok!")
     def toWalk(self):
         print("I'm Sakib, I can walking any where")
+    #Operator Overlaoding
     def __add__(self,other):
         return self.age + other.age
     def __mul__(self,other):
         return self.age * other.age
-
-        
 
 
 Sakib = Cricketer("Sakib",35,56,56,"Bangladesh")
