@@ -11,3 +11,6 @@ for index in ff:
 xii=[45,67,34,4,4,4,78,99,23,56,757,65,76,67]
 for index,value in enumerate(xii):
     print(index,value)
+
+for i in range(1,10,1):
+    print(i)
