@@ -116,10 +116,44 @@ WHERE Roll = 110;
 
 ## Select Operation Advance
 
-Add description here for advanced select operations.
+The following are some advanced select operations:
+
+### DISTINCT
+
+To select distinct values from a column, use the `DISTINCT` keyword. For example:
 
 ```sql
--- Advanced select query goes here
+SELECT DISTINCT region_id FROM countries;
+```
+
+### ORDER BY
+
+To order the result set by one or more columns, use the `ORDER BY` clause. You can specify the sorting order as ASC (ascending) or DESC (descending). For example:
+
+```sql
+SELECT *
+FROM departments
+WHERE ...
+ORDER BY location_id ASC;
+
+SELECT *
+FROM employees
+WHERE department_id = 90
+ORDER BY first_name ASC;
+
+SELECT *
+FROM departments
+ORDER BY location_id DESC;
+```
+
+### LIMIT
+
+To limit the number of rows returned by a query, you can use the `LIMIT` clause. It allows you to specify the maximum number of rows to be returned. Additionally, you can use the `OFFSET` clause to skip a certain number of rows before returning the result set. For example:
+
+```sql
+SELECT *
+FROM employees
+LIMIT 10 OFFSET 15;
 ```
 
 Feel free to modify and add more details to this README file as per your project requirements.
