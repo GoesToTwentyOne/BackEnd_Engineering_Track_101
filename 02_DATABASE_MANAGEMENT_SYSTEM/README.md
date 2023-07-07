@@ -18,6 +18,7 @@ This README file provides information about the database operations performed in
 - [Comparison Operators](#comparison-operators)
 - [Logical Operators](#logical-operators)
 - [IN, NOT IN, LIKE, AS Operators](#in-not-in-like-as-operators)
+- [Show All Tables in Database](#show-all-tables-in-database)
 
 ## Show Databases
 
@@ -247,6 +248,14 @@ WHERE first_name LIKE "%D%";
 
 SELECT first_name AS NAME
 FROM employees;
+```
+
+## Show All Tables in Database
+```sql
+SELECT *
+FROM information_schema.tables
+WHERE table_type='BASE TABLE'
+      AND table_schema = 'hr'
 ```
 
 Feel free to modify and add more details to this README file as per your project requirements.
