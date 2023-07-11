@@ -19,6 +19,54 @@ This README file provides information about the database operations performed in
 - [Logical Operators](#logical-operators)
 - [IN, NOT IN, LIKE, AS Operators](#in-not-in-like-as-operators)
 - [Show All Tables in Database](#show-all-tables-in-database)
+- [Functions](#functions)
+  - [SELECT UPPER](#select-upper)
+  - [SELECT LOWER](#select-lower)
+  - [SELECT ABS](#select-abs)
+  - [SELECT COS](#select-cos)
+  - [SELECT ACOS](#select-acos)
+  - [SELECT SIN](#select-sin)
+  - [SELECT TAN](#select-tan)
+  - [SELECT CEIL](#select-ceil)
+  - [SELECT FLOOR](#select-floor)
+  - [SELECT DEGREES](#select-degrees)
+  - [SELECT RADIANS](#select-radians)
+  - [SELECT DIV](#select-div)
+  - [SELECT EXP](#select-exp)
+  - [SELECT GREATEST](#select-greatest)
+  - [SELECT LEAST](#select-least)
+  - [SELECT LN](#select-ln)
+  - [SELECT LOG](#select-log)
+  - [SELECT LOG10](#select-log10)
+  - [SELECT LOG2](#select-log2)
+  - [SELECT MOD](#select-mod)
+  - [SELECT PI](#select-pi)
+  - [SELECT POW](#select-pow)
+  - [SELECT RAND](#select-rand)
+  - [SELECT ROUND](#select-round)
+  - [SELECT SQRT](#select-sqrt)
+  - [SELECT TRUNCATE](#select-truncate)
+- [GROUP FUNCTIONS](#group-functions)
+  - [MAX](#max)
+  - [MIN](#min)
+  - [SUM](#sum)
+  - [AVG](#avg)
+  - [COUNT](#count)
+- [GROUP BY FUNCTION](#group-by-function)
+- [HAVING](#having)
+- [ALTER TABLE](#alter-table)
+- [TRUNCATE TABLE](#truncate-table)
+- [SUB QUERY](#sub-query)
+- [CORRELATED SUBQUERY](#correlated-subquery)
+- [JOINING TABLES](#joining-tables)
+  - [USING](#using-keyword)
+  - [ON](#on-keyword)
+  - [SELF JOIN](#self-join)
+  - [INNER JOIN](#inner-join)
+  - [LEFT JOIN](#left-join)
+  - [RIGHT JOIN](#right-join)
+  - [FULL JOIN](#full-join)
+
 
 ## Show Databases
 
@@ -256,6 +304,510 @@ SELECT *
 FROM information_schema.tables
 WHERE table_type='BASE TABLE'
       AND table_schema = 'hr'
+```
+## Functions
+
+### SELECT UPPER
+
+Converts a string to uppercase.
+
+Example:
+```sql
+SELECT UPPER("nihad Hossain");
+```
+
+### SELECT LOWER
+
+Converts a string to lowercase.
+
+Example:
+```sql
+SELECT LOWER("NIHGAD Hossain");
+```
+
+### SELECT ABS
+
+Returns the absolute value of a number.
+
+Example:
+```sql
+SELECT ABS(-2);
+```
+
+### SELECT COS
+
+Returns the cosine of an angle.
+
+Example:
+```sql
+SELECT COS(90);
+```
+
+### SELECT ACOS
+
+Returns the inverse cosine (also known as arccosine) of a number.
+
+Example:
+```sql
+SELECT ACOS(30);
+```
+
+### SELECT SIN
+
+Returns the sine of an angle.
+
+Example:
+```sql
+SELECT SIN(45);
+```
+
+### SELECT TAN
+
+Returns the tangent of an angle.
+
+Example:
+```sql
+SELECT TAN(60);
+```
+
+### SELECT CEIL
+
+Returns the smallest integer greater than or equal to a number.
+
+Example:
+```sql
+SELECT CEIL(45.969);
+```
+
+### SELECT FLOOR
+
+Returns the largest integer less than or equal to a number.
+
+Example:
+```sql
+SELECT FLOOR(45.969);
+```
+
+### SELECT DEGREES
+
+Converts an angle from radians to degrees.
+
+Example:
+```sql
+SELECT DEGREES(45.969);
+```
+
+### SELECT RADIANS
+
+Converts an angle from degrees to radians.
+
+Example:
+```sql
+SELECT RADIANS(45.969);
+```
+
+### SELECT DIV
+
+Performs integer division and returns the quotient.
+
+Example:
+```sql
+SELECT 10 DIV 5;
+```
+
+### SELECT EXP
+
+Returns Euler's number raised to the power of a number.
+
+Example:
+```sql
+SELECT EXP(10);
+```
+
+### SELECT GREATEST
+
+Returns the greatest value among a list of values.
+
+Example:
+```sql
+SELECT GREATEST(1,2,3,4,5);
+```
+
+### SELECT LEAST
+
+Returns the least value among a list of values.
+
+Example:
+```sql
+SELECT LEAST(1,2,3,4,5);
+```
+
+### SELECT LN
+
+Returns the natural logarithm of a number.
+
+Example:
+```sql
+SELECT LN(4.5);
+```
+
+### SELECT LOG
+
+Returns the logarithm of a number to the specified base.
+
+Example:
+```sql
+SELECT LOG(4.5);
+```
+
+### SELECT LOG10
+
+Returns the base-10 logarithm of a number.
+
+Example:
+```sql
+SELECT LOG10(4.5);
+```
+
+### SELECT LOG2
+
+Returns the base-2 logarithm of a number.
+
+Example:
+```sql
+SELECT LOG2(4.5);
+```
+
+### SELECT MOD
+
+Returns the remainder of a division operation.
+
+Example:
+```sql
+SELECT 10 MOD 3;
+```
+
+### SELECT PI
+
+Returns the value of pi (π).
+
+Example:
+```sql
+SELECT PI();
+```
+
+### SELECT POW
+
+Returns a number raised to the power of another number.
+
+Example:
+```sql
+SELECT POW(2,4);
+```
+
+### SELECT RAND
+
+Returns a random number.
+
+Example:
+```sql
+SELECT RAND();
+```
+
+### SELECT ROUND
+
+Rounds a number to a specified number of decimal places.
+
+Example:
+```sql
+SELECT ROUND(45.56565,2);
+```
+
+### SELECT SQRT
+
+Returns the square root of a number.
+
+Example:
+```sql
+SELECT SQRT(100);
+```
+
+### SELECT TRUNCATE
+
+Truncates a number to a specified number of decimal places.
+
+Example:
+```sql
+SELECT TRUNCATE(45.543456,2);
+```
+
+## GROUP FUNCTIONS
+
+### MAX
+
+Returns the maximum value in a column.
+
+Example:
+```sql
+SELECT MAX(salary)
+FROM employees;
+```
+
+### MIN
+
+Returns the minimum value in a column.
+
+Example:
+```sql
+SELECT MIN(salary)
+FROM employees;
+```
+
+### SUM
+
+Returns the sum of values in a column.
+
+Example:
+```sql
+SELECT SUM(salary)
+FROM employees;
+```
+
+### AVG
+
+Returns the average value of a column.
+
+Example:
+```sql
+SELECT AVG(salary)
+FROM employees;
+```
+
+### COUNT
+
+Returns the number of rows in a table or the number of non-null values in a column.
+
+Example:
+```sql
+SELECT COUNT(employee_id)
+FROM employees;
+
+SELECT COUNT(*)
+FROM employees;
+```
+
+## GROUP BY FUNCTION
+
+Performs aggregation on a specific column or columns and groups the result by one or more columns.
+
+Example:
+```sql
+SELECT job_id, COUNT(*)
+FROM employees
+GROUP BY job_id;
+```
+
+## HAVING
+
+Filters the result set based on a condition applied to aggregated data.
+
+Example:
+```sql
+SELECT COUNT(*), job_id
+FROM employees
+GROUP BY job_id
+HAVING COUNT(*) > 1;
+```
+
+## ALTER TABLE
+
+Adds a
+
+ new column to an existing table.
+
+Example:
+```sql
+ALTER TABLE employees 
+ADD doc VARCHAR(5);
+```
+
+## TRUNCATE TABLE
+
+Removes all data from a table.
+
+Example:
+```sql
+TRUNCATE TABLE student;
+```
+
+## SUB QUERY
+
+Performs a query inside another query.
+
+Example:
+```sql
+SELECT first_name, last_name
+FROM employees
+WHERE salary > (
+	SELECT AVG(salary)
+    FROM employees
+    WHERE first_name = "LEX"
+);
+```
+
+Example:
+```sql
+SELECT first_name, last_name
+FROM employees
+WHERE employee_id != 107 AND salary = (
+	SELECT salary
+    FROM employees
+    WHERE employee_id = 107
+);
+```
+
+Example:
+```sql
+SELECT first_name, last_name, job_id
+FROM employees
+WHERE job_id = (
+	SELECT job_id
+    FROM employees
+    WHERE employee_id = 107
+);
+```
+
+Example:
+```sql
+SELECT first_name, last_name, salary, job_id
+FROM employees
+WHERE job_id = (
+	SELECT job_id
+    FROM employees
+    WHERE employee_id = 107
+) AND (salary > (
+	SELECT salary
+    FROM employees
+    WHERE first_name = "Bruce"
+));
+```
+
+Example:
+```sql
+SELECT first_name, last_name, salary, job_id
+FROM employees
+WHERE job_id != 'IT_PROG'
+AND salary < ANY (
+	SELECT salary
+	FROM employees
+	WHERE job_id = 'IT_PROG'
+);
+```
+
+## CORRELATED SUBQUERY
+
+Performs a subquery that refers to a column from the outer query.
+
+Example:
+```sql
+SELECT *
+FROM employees e1
+WHERE 3 <= (
+	SELECT COUNT(*)
+	FROM employees e2
+	WHERE e2.salary > e1.salary
+);
+```
+
+Example:
+```sql
+SELECT *
+FROM employees E1
+WHERE NOT EXISTS (
+	SELECT *
+	FROM employees E2
+	WHERE E2.department_id = E1.department_id AND E2.salary > E1.salary
+);
+```
+
+## JOINING TABLES
+
+Combines rows from two or more tables based on a related column between them.
+
+Example:
+```sql
+SELECT student.ROLL, student.NAME, result.GPA
+FROM student, result
+WHERE student.ROLL = result.Roll;
+```
+
+Example:
+```sql
+SELECT e.first_name, e.last_name, e.employee_id, d.department_name, e.department_id
+FROM employees e, departments d
+WHERE e.department_id = d.department_id;
+```
+
+Example:
+```sql
+SELECT e.first_name, e.last_name, e.employee_id, e.job_id, e.salary, e.department_id, d.department_name
+FROM employees e JOIN departments d USING (department_id);
+```
+
+Example:
+```sql
+SELECT e.first_name, e.last_name, e.employee_id, e.job_id, e.salary, e.department_id, d.department_name
+FROM employees e JOIN departments d ON (e.department_id = d.department_id);
+```
+
+## SELF JOIN
+
+Joins a table with itself.
+
+Example:
+```sql
+SELECT e.first_name, m.first_name
+FROM employees e JOIN employees m ON (e.manager_id = m.employee_id);
+```
+
+## INNER JOIN
+
+Returns rows that have matching values in both tables involved in the join.
+
+Example:
+```sql
+SELECT e.first_name, e.last_name, e.employee_id, j.start_date
+FROM employees e INNER JOIN job_history j ON (e.employee_id = j.employee_id);
+```
+
+## LEFT JOIN
+
+Returns all rows from the left table and the matching rows from the right table. If there is no match, NULL values are returned for the right table's columns.
+
+Example:
+```sql
+SELECT e.first_name, e.last_name, e.employee_id, j.start_date
+FROM employees e LEFT JOIN job_history j ON (e.employee_id = j.employee_id);
+```
+
+## RIGHT JOIN
+
+Returns all rows from the right table and the matching rows from the left table. If there is no match, NULL values are returned for the left table's columns.
+
+Example:
+```sql
+SELECT e.first_name, e.last_name, e.employee_id, j.start_date
+FROM employees e RIGHT JOIN job_history j ON (e.employee_id = j.employee_id);
+```
+
+## FULL JOIN
+
+Returns all rows from both tables. If there is no match, NULL values are returned for columns in the non-matching table.
+
+Example:
+```sql
+SELECT e.first_name, e.last_name, e.employee_id, j.start_date
+FROM employees e FULL JOIN job_history j ON (e.employee_id = j.employee_id);
 ```
 
 Feel free to modify and add more details to this README file as per your project requirements.
