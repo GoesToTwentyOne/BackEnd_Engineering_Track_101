@@ -21,5 +21,8 @@ my_cursor.execute(sql_command)
 my_db.commit()
 
 my_cursor.execute("SELECT * FROM student;")
-data=my_cursor.fetchall()
-print(data)
+datas=my_cursor.fetchall()
+
+
+for data in datas:
+    print(data)
