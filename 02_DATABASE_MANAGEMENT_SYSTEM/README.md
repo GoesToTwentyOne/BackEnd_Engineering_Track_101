@@ -66,6 +66,13 @@ This README file provides information about the database operations performed in
   - [LEFT JOIN](#left-join)
   - [RIGHT JOIN](#right-join)
   - [FULL JOIN](#full-join)
+- [Set Operations](#set-operations)
+  - [UNION](#union)
+  - [UNION ALL](#union-all)
+  - [MINUS](#minus)
+- [ON DELETE CASCADE](#on-delete-cascade)
+- [Triggers](#triggers)
+- [Date and Time Operations](#date-and-time-operations)
 
 
 ## Show Databases
@@ -809,5 +816,130 @@ Example:
 SELECT e.first_name, e.last_name, e.employee_id, j.start_date
 FROM employees e FULL JOIN job_history j ON (e.employee_id = j.employee_id);
 ```
+
+## Set Operations
+
+### UNION
+
+Performs a union operation between two result sets.
+
+Example:
+```sql
+SELECT employee_id
+FROM employees
+UNION
+SELECT job_id
+FROM job_history;
+```
+
+### UNION ALL
+
+Performs a union operation including duplicate values.
+
+Example:
+```sql
+SELECT employee_id, first_name
+FROM employees
+UNION ALL
+SELECT job_id, start_date
+FROM job_history;
+```
+
+### MINUS
+
+Performs a set difference operation between two result sets.
+
+Example:
+```sql
+SELECT employee_id, first_name
+FROM employees
+MINUS
+SELECT job_id, start_date
+FROM job_history;
+```
+
+## ON DELETE CASCADE
+
+Applies cascading deletes to maintain referential integrity.
+
+Example:
+```sql
+USE THIRD_WEEK_PRACTICE;
+CREATE TABLE student (
+	ID INT PRIMARY KEY,
+    NAME VARCHAR(25),
+    AGE INT
+);
+INSERT INTO student (ID, NAME, AGE)
+VALUES (101, "A", 15),
+       (102, "B", 16),
+       (103, "C", 17);
+
+CREATE TABLE course (
+	Course_Code INT PRIMARY KEY,
+    Course_Name VARCHAR(25)
+);
+
+INSERT INTO course (Course_Code, Course_Name)
+VALUES (111, "C"),
+       (112, "C++"),
+       (113, "Algo");
+
+CREATE TABLE enroll (
+	ID INT,
+    Course_Code INT,
+    Journey_Started_date DATE,
+    PRIMARY KEY (ID, Course_Code),
+    FOREIGN KEY (ID)
+		REFERENCES student (ID)
+        ON DELETE CASCADE,
+	FOREIGN KEY (Course_Code)
+		REFERENCES course (Course_Code)
+		ON DELETE CASCADE
+);
+
+INSERT INTO enroll (ID, Course_Code, Journey_Started_date)
+VALUES (101, 112, "2023-07-07"),
+       (103, 111, "2023-07-07"),
+       (101, 113, "2023-07-07");
+```
+
+## Triggers
+
+Triggers are defined actions that are automatically executed in response to specific events.
+
+Example:
+```sql
+CREATE TRIGGER auto_cap
+BEFORE INSERT ON student
+FOR EACH ROW
+SET NEW.Name = UPPER(NEW.Name);
+```
+
+## Date and Time Operations
+
+Performing operations and functions on dates and times.
+
+Example:
+```sql
+SELECT DAYOFMONTH("2023-07-13");
+SELECT MONTH("2023-07-13");
+SELECT ADDDATE("2023-07-13", 19);
+
+SELECT ADDTIME("2017-06-15 09:34:21", "05:50:21");
+SELECT CONVERT_TZ('2008-05-15 12:00:00', '+00:00', '+10:00');
+SELECT CURDATE();
+SELECT CURTIME();
+SELECT CURTIME(4);
+SELECT DATE("2017-06-15 09:34:21");
+SELECT DATEDIFF("2017-06-15 09:34:21", "2019-06-05");
+SELECT DATE_ADD("2023-07-13", INTERVAL 1 DAY);
+SELECT DATE_SUB("2023-07-13", INTERVAL 1 YEAR);
+
+SELECT DATE_FORMAT("2023-07-13", '%W %M %Y');
+SELECT DATE_FORMAT("2023-07-13 09:34:21", '%H %i %s');
+SELECT DAYOFWEEK("2023-07-13");
+```
+
 
 Feel free to modify and add more details to this README file as per your project requirements.
