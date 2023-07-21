@@ -1,6 +1,3 @@
-import dis
-
-
 x=20
 y=4.5
 district="Thakurgaon"
