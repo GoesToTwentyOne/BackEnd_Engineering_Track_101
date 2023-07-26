@@ -8,7 +8,7 @@ To set up the project, please follow the steps below:
 
 1. Install `virtualenv` by running the following command:
    ```
-   pip3 install virtualenv
+   virtualenv venv
    ```
 
 2. Upgrade `pip` by executing the following command:
