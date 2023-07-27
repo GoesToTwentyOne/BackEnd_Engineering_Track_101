@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+
+<h1>This is a Heading</h1>
+<h1>This is from : {{author}}</h1>
+<p>This is a paragraph.</p>
+{% if age >= 18 %}
+    <p>You are eligible to vote.</p>
+{% else %}
+    <p>You are not eligible to vote.</p>
+{% endif %}
+
+
+
+<h1>Results</h1>
+{% if marks >= 90 and marks <= 100 %}
+    <p>A</p>
+{% elif marks >= 80 and marks <= 89 %}
+    <p>A-</p>
+{% elif marks >= 70 and marks <= 79 %}
+    <p>B</p>
+{% elif marks > 60 and marks <= 69 %}
+    <p>C</p>
+{% elif marks >= 50 and marks <= 59 %}
+    <p>D</p>
+{% elif marks >= 40 and marks <= 49 %}
+    <p>E</p>
+{% elif marks <= 40 %}
+    <p>Fail</p>
+{% else %}
+    <p>Invalid</p>
+{% endif %}
+
+<h1>Looping</h1>
+<table border=1 width=500>
+    <tr>
+        <th>Id<td>
+        <th>Course</td>
+        <th>Teacher</td>
+
+    </tr>
+    {% for i in courses %}
+    <tr>
+        <td>{{i.id}}<td>
+        <td>{{i.course}}</td>
+        <td>{{i.teacher}}</td>
+
+    </tr>
+    {% endfor %}
+</table>
+<h1>Template Language Filter</h1>
+<h1>{{marks | add:"4" }}</h1>
+<h1>{{marks | divisibleby:"4" }}</h1>
+<h1>{{ blog | length}}</h1>
+<h1>{{my_list | join:"-"}}</h1>
+<h1>{{blog | lower}}</h1>
+<h1>{{my_list | make_list }}</h1>
+
+
+
+
+
+</body>
+</html>
