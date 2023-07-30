@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load first_tags %}
+{% block tittle %} about page {% endblock %}
+{% block content %} I'm from about page Author {{ author }} {{ block.super }} 
+<h1>{{ author| change_name:'change'}}</h1>
+<h1>{{ author| change_name:'title'}}</h1>
+
+{% show_courses %}
+{% endblock %}
+

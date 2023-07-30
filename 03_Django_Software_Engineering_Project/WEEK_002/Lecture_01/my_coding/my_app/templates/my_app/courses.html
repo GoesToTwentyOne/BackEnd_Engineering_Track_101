@@ -1,0 +1,20 @@
+{% load first_tags%}
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Teacher</th>
+      </tr>
+    </thead>
+    <tbody>
+{% for course in courses %}
+      <tr>
+        <th scope="row">1</th>
+        <td>{{course.Id}}</td>
+        <td>{{course.course}}</td>
+        <td>{{course.Teacher}}</td>
+      </tr>
+{% endfor %}
+</tbody>
+</table>
