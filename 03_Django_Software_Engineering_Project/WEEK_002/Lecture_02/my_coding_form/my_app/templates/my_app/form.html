@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %} 
+<div style="width: 50%; height: 500px; margin: auto;" class="pt-5" >
+    <h1>Form Input Validation</h1>
+    <form method="POST" action="/my_app/about/">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleInputName" class="form-label">Name</label>
+            <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp" name="user_name">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="user_email">
+        </div>
+        <select class="form-select" multiple aria-label="Multiple select example" name="select">
+            <option selected>Rating</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+{% endblock %}

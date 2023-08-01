@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block tittle %} about page {% endblock %}
+{% block content %} I'm from about page Author {{ block.super }} 
+<h1> Name = {{ name }}</h1>
+<h1> Email = {{email}}</h1>
+<h1> Rating = {{select}}</h1>
+{% endblock %}
+
