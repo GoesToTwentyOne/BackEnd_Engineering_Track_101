@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="width: 78%; height: 500px; margin: auto;">
+    <h1 style="text-align: center">Your Book List </h1>
+    {% if book %}
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Book Name</th>
+            <th scope="col">Author </th>
+            <th scope="col">Catagory</th>
+            <th scope="col">Published Date</th>
+            <th scope="col">Last Update</th>
+            <th scope="col">ISBN</th>
+            <th scope="col">Actions</th>
+            
+            
+          </tr>
+        </thead>
+        <tbody>
+           
+            {% for item in book %}
+          <tr>
+            <td>{{item.id}}</td>
+            <td>{{item.book_name}}</td>
+            <td>{{item.author}}</td>
+            <td>{{item.catagory}}</td>
+            <td>{{ item.first_published}}</td>
+            <td>{{item.last_updated}}</td>
+            <td>{{ item.isbn}}</td>
+            <td><a href="{% url 'edit' id=item.id %}" type="button" class="btn btn-danger btn-sm">Edit</a> <a href="{% url 'delete' id=item.id %}" type="button" class="btn btn-warning btn-sm">Delete</a></td>
+          </tr>
+          {% endfor %}
+         
+        </tbody>
+      </table>
+      {% else %}
+      <h1 style="text-align: center">Your Book List Empty</h1>
+      {% endif %}
+</div>
+
+{% endblock %}
