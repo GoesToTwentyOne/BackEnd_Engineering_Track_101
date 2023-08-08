@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+{% comment %} <small {% if message.tags %} class="{{message.tags}}" {% endif %}></small> {% endcomment %}
+<button type="button" class="btn btn-primary">{{ message }}</button>
+{% endfor %}
+{% endif %}
+<h1 style="text-align: center;">Chnage User data  Form</h1>
+<div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+    <form method='POST' action="" style="width: 40%; height: 100%;" novalidate>
+        {% csrf_token %}
+        {{ form | crispy }}
+   
+            {% comment %} {% for fm in form %}
+            {{fm.label_tag }}
+            {{fm}}
+            {{fm.errors}}
+            {% endfor %}  {% endcomment %}
+        {# Add any additional form fields, labels, and error messages as needed #}
+        <br/>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <br/>
+        
+    </form>
+</div>
+{% endblock %}
