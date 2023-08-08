@@ -1,0 +1,511 @@
+###################### SHOW DATABASES    ############################
+SHOW DATABASES;
+
+
+
+##################### CREATE DATABASES ##############################
+CREATE DATABASE second_week;
+
+
+######################### USE DATABASE #############################
+USE DATABASE second_week;
+
+
+####################### CREATE TABLES ###############################
+CREATE TABLE student(
+	Roll INT,
+    Name VARCHAR(25),
+    Contact_No CHAR(13),
+    Email_id VARCHAR(25)
+);
+
+############################# RENAME TABLE ###########################
+RENAME TABLE student_database TO student;
+
+
+####################### DROP TABLES #################################
+DROP TABLE student;
+
+
+ 
+
+
+
+######################### INSERT TABLE DATA ##########################
+INSERT INTO student(Roll,Name,Contact_No,Email_id)
+VALUES(101,"Hasif","8801773684304","h@gmail.com");
+
+
+
+SELECT * FROM student;
+
+
+
+###################################### CONSTRAINT ################################
+CREATE TABLE student(
+    Roll INT NOT NULL UNIQUE PRIMARY KEY,
+    Name VARCHAR(25) NOT NULL,
+    Contact_No CHAR(13) NOT NULL UNIQUE,
+    Email_id VARCHAR(25) NOT NULL UNIQUE,
+    Age INT CHECK(Age>=0)
+);
+
+SET SQL_SAFE_UPDATES=0;
+
+####################################  UPDATE ###################################
+SET SQL_SAFE_UPDATES=0;
+UPDATE student
+SET Age=15
+WHERE ROLL=102;
+SET SQL_SAFE_UPDATES=1;
+
+
+############################### DELETE ##########################################
+DELETE FROM student
+WHERE Roll=103;
+
+
+################################## SIMPLE SELECT #################################
+
+SELECT * FROM student
+WHERE Roll=110;
+
+SELECT Name,Roll FROM student
+WHERE Roll=110;
+
+
+
+#######################  SELECT OPERATION ADVANCE  #######################################
+
+## DISTINCT ##
+SELECT DISTINCT region_id FROM countries;
+
+## Order BY
+1. ASSENDING
+SELECT *
+FROM departments
+WHERE .....
+ORDER BY location_id ASC;
+SELECT *
+FROM employees
+WHERE department_id = 90
+ORDER BY first_name ASC;
+
+2.DESENDING
+SELECT *
+FROM departments
+ORDER BY location_id DESC;
+
+## LIMIT ##
+SELECT *
+FROM employees
+LIMIT 10 OFFSET 15;
+
+
+
+####################################  ARITHMATIC OPERATIONS ################################################################
+SELECT 5+3;
+SELECT 5-3;
+SELECT 5*3;
+SELECT 5/3;
+SELECT 5%3;
+
+###################################### COMPARISON OPERATOE #############################################################
+
+SELECT first_name,salary,email
+FROM employees
+WHERE salary = 9000;
+WHERE salary != 9000;
+WHERE salary <= 9000;
+WHERE salary >= 9000;
+WHERE salary < 9000;
+WHERE salary > 9000;
+
+SELECT first_name,salary,email
+FROM employees
+WHERE salary BETWEEN 9000 AND 15000
+
+
+###################################### LOGICAL OPERATOR #############################################################
+SELECT first_name,salary,email
+FROM employees
+WHERE first_name = "John" AND salary >=2000;
+
+SELECT first_name,salary,email
+FROM employees
+WHERE first_name = "John" OR salary >=2000;
+
+
+################################## IN, NOT IN, LIKE, AS OPERATOR ##################################################
+SELECT * 
+FROM employees
+WHERE job_id IN("AD_PRES","AD_VP","FI_MGR");
+
+SELECT * 
+FROM employees
+WHERE job_id NOT IN("AD_PRES","AD_VP","FI_MGR");
+
+
+SELECT * 
+FROM employees
+WHERE first_name LIKE "D%";
+
+SELECT * 
+FROM employees
+WHERE first_name LIKE "%D";
+
+SELECT * 
+FROM employees
+WHERE first_name LIKE "%D%";
+
+SELECT first_name as NAME
+FROM employees
+
+########################################## SHOW all Tables ######################################
+SELECT *
+FROM information_schema.tables
+WHERE table_type='BASE TABLE'
+      AND table_schema = 'hr'
+
+
+################################### Functions ###################################################
+
+SELECT UPPER("nihad Hossain");
+SELECT LOWER("NIHGAD Hossain");
+SELECT ABS(-2);
+SELECT COS(90);
+SELECT ACOS(30);
+same for SIN,TAN
+SELECT CEIL(45.969);
+SELECT FLOOR(45.969);
+SELECT DEGREES(45.969);
+SELECT RADIANS(45.969);
+SELECT 10 DIV 5;
+SELECT EXP(10);
+SELECT GREATEST(1,2,3,4,5);
+SELECT LEAST(1,2,3,4,5);
+SELECT LN(4.5);
+SELECT LOG(4.5);
+SELECT LOG10(4.5);
+SELECT LOG2(4.5);
+SELECT 10 MOD 3;
+SELECT PI();
+SELECT POW(2,4);
+SELECT RAND(110);
+SELECT ROUND(45.56565,2);
+SELECT SQRT(100);
+SELECT TRUNCATE(45.543456,2);
+
+
+##################################### GROUP FUNCTIONS #####################################
+
+## MAX ##
+SELECT MAX(salary)
+FROM employees;
+
+## MIN ##
+SELECT MIN(salary)
+FROM employees;
+
+## SUM ##
+SELECT SUM(salary)
+FROM employees;
+
+## AVG ##
+SELECT AVG(salary)
+FROM employees;
+
+## COUNT ##
+SELECT COUNT(employee_id)
+FROM employees;
+SELECT COUNT(*)
+FROM employees;
+
+
+################################ GROUP BY FUNCTION ########################################
+SELECT job_id,COUNT(*)
+FROM employees
+GROUP BY job_id;
+
+SELECT MAX(salary),job_id,COUNT(*)
+FROM employees
+GROUP BY job_id;
+
+SELECT COUNT(*),job_id,SUM(salary)
+FROM employees
+GROUP BY job_id;
+
+
+#################################### HAVING ############################################## 
+SELECT COUNT(*),job_id
+FROM employees
+GROUP BY job_id
+HAVING COUNT(*)>1;
+
+
+
+
+
+############################# ALTER TABLE ############################################
+Three types of work can done:
+	column add
+	column delete
+	column modify
+## ADD ##
+ALTER TABLE employees 
+ADD doc VARCHAR(5);
+
+## DELETE ##
+ALTER TABLE employees 
+DROP COLUMN doc ;
+
+## MODIFY ##
+ALTER TABLE employees 
+MODIFY doc VARCHAR(50);
+
+
+
+########################### TRUNCATE TABLE ############################################
+TRUNCATE TABLE student;
+
+
+
+############################## SUB QUERRY ##########################################
+
+SELECT first_name,last_name
+FROM employees
+WHERE salary >(
+	SELECT AVG(salary)
+    FROM employees
+    WHERE first_name="LEX"
+);
+
+SELECT first_name,last_name
+FROM employees
+WHERE employee_id != 107 AND salary =(
+	SELECT salary
+    FROM employees
+    WHERE employee_id = 107
+);
+
+
+
+SELECT first_name,last_name,job_id
+FROM employees
+WHERE job_id= (
+	SELECT job_id
+    FROM employees
+    WHERE employee_id=107
+);
+
+
+
+SELECT first_name,last_name,salary,job_id
+FROM employees
+WHERE   job_id=(
+	SELECT job_id
+    FROM employees
+    WHERE employee_id=107
+) AND (salary>(
+	SELECT salary
+    FROM employees
+    WHERE first_name="Bruce"
+));
+
+
+SELECT first_name,last_name,salary,job_id
+FROM employees
+WHERE   job_id != 'IT_PROG'
+AND salary < ANY(
+SELECT salary
+FROM employees
+WHERE job_id='IT_PROG'
+)
+
+##################################### CORRELATED SUBQUERY ##########################################
+SELECT *
+FROM employees e1
+WHERE 3<=(
+SELECT COUNT(*)
+FROM employees e2
+WHERE e2.salary > e1.salary
+)
+
+
+
+SELECT *
+FROM employees E1
+WHERE NOT EXISTS(
+SELECT *
+FROM employees E2
+WHERE E2.department_id = E1.department_id AND E2.salary >E1.salary
+);
+
+############################################################### WITHOUT JOIN TABLE  [Join STATEMENT] ############################################
+
+SELECT student.ROLL,student.NAME,result.GPA
+FROM student,result
+WHERE student.ROLL = result.Roll;
+
+
+
+SELECT e.first_name,e.last_name,e.employee_id,d.department_name,e.department_id
+FROM employees e,departments d
+WHERE e.department_id = d.department_id 
+
+
+
+############################################################### JOINING TABLES ##########################################
+
+
+ ## USE USING keyword ##
+ SELECT employee_id,job_id,salary,department_id,department_name
+ FROM employees JOIN departments USING(department_id)
+
+ SELECT e.first_name,e.last_name,e.employee_id,e.job_id,e.salary,e.department_id,d.department_name
+ FROM employees e JOIN departments d USING(department_id)
+
+
+ ## USE ON keyword ##
+ SELECT e.first_name,e.last_name,e.employee_id,e.job_id,e.salary,e.department_id,d.department_name
+ FROM employees e JOIN departments d ON(e.department_id = d.department_id)
+
+
+## SELF JOIN ##
+SELECT e.first_name,m.first_name
+FROM employees e JOIN employees m ON(e.manager_id = m.employee_id)
+
+## INNER JOIN ##
+** ONLY COMMON THINGS
+SELECT e.first_name,e.last_name,e.employee_id,j.start_date
+FROM employees e INNER JOIN job_history j ON(e.employee_id = j.employee_id)
+
+
+## LEFT JOIN ##
+ALL DATA RETRIVE FROM LEFT TABLE
+SELECT e.first_name,e.last_name,e.employee_id,j.start_date
+FROM employees e LEFT JOIN job_history j ON(e.employee_id = j.employee_id)
+
+
+## RIGHT JOIN ##
+ALL DATA RETRIVE FROM RIGHT TABLE
+SELECT e.first_name,e.last_name,e.employee_id,j.start_date
+FROM employees e RIGHT JOIN job_history j ON(e.employee_id = j.employee_id)
+
+## FULL JOIN ##
+ALL DATA RETRIVE FROM BOTH TABLE
+
+
+
+######################################## SET OPERATION #########################################
+## UNION ##
+SELECT employee_id
+FROM employees
+UNION
+SELECT job_id
+FROM job_history;
+
+## UNION ALL ##
+SELECT employee_id,first_name
+FROM employees
+UNION ALL
+SELECT job_id,start_date
+FROM job_history;
+
+## MINUS ##
+SELECT employee_id,first_name
+FROM employees
+MINUS;
+SELECT job_id,start_date
+FROM job_history;
+
+
+############################## ON DELETE CASCADE #################################
+USE THIRD_WEEK_PRACTICE;
+CREATE TABLE student(
+	ID INT PRIMARY KEY,
+    NAME VARCHAR(25),
+    AGE INT
+
+);
+INSERT INTO student(ID,NAME,AGE)
+VALUES(101,"A",15),
+	(102,"B",16),
+    (103,"C",17);
+SELECT *
+FROM student;
+
+CREATE TABLE course (
+	Course_Code INT PRIMARY KEY,
+    Course_Name VARCHAR(25)
+);
+
+INSERT INTO course(Course_Code,Course_Name)
+VALUES (111,"C"),
+	(112,"C++"),
+    (113,"Algo");
+SELECT * 
+FROM course;
+
+
+CREATE TABLE enroll (
+	ID INT,
+    Course_Code INT,
+    Journey_Started_date date,
+    primary key(ID,Course_Code),
+    FOREIGN KEY(ID)
+		REFERENCES student(ID)
+        ON DELETE CASCADE,
+	FOREIGN KEY(Course_Code)
+		REFERENCES course(Course_Code)
+		ON DELETE CASCADE
+
+);
+INSERT INTO enroll(ID,Course_Code,Journey_Started_date)
+VALUES(101,112,"07-07-23"),
+	(103,111,"07-07-23"),
+    (101,113,"07-07-23");
+
+SELECT * FROM student;
+SELECT * FROM enroll;
+
+SET SQL_SAFE_UPDATES = 0;
+DELETE FROM student
+WHERE ID=103;
+SELECT * FROM student;
+SELECT * FROM enroll;
+
+
+
+##################################### TRIGGERS ############################################
+
+CREATE TRIGGER auto_cap
+BEFORE INSERT ON student
+FOR EACH ROW
+SET NEW.Name= UPPER(NEW.Name);
+
+
+############################## DATE AND TIMES ############################################
+SELECT DAYOFMONTH("2023-07-13");
+SELECT MONTH("2023-07-13");
+SELECT ADDDATE("2023-07-13",19);
+
+SELECT ADDTIME("2017-06-15 09:34:21", "05:50:21");
+SELECT CONVERT_TZ('2008-05-15 12:00:00','+00:00','+10:00') ;
+SELECT CURDATE();
+SELECT CURTIME();
+SELECT CURTIME(4);
+SELECT DATE("2017-06-15 09:34:21");
+SELECT DATEDIFF("2017-06-15 09:34:21","2019-06-5"); 
+SELECT DATE_ADD("2023-07-13", INTERVAL 1 DAY);
+SELECT DATE_SUB("2023-07-13", INTERVAL 1 YEAR);
+
+SELECT DATE_FORMAT("2023-07-13",'%W %M %Y');
+SELECT DATE_FORMAT("2023-07-13 09:34:21",'%H %i %s');
+SELECT DAYOFWEEK("2023-07-13")
+
+
+
+
+
+
