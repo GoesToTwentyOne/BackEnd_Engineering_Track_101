@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="width: 50%; height: 500px; margin: auto;">
+    <h1 style="text-align: center">Your Book List </h1>
+    {% if book %}
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Book Name</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for item in book %}
+          <tr>
+            <td>{{item.id}}</td>
+            <td><a href="{% url 'details' id=item.id %}">{{item.book_name}}</a></td>
+          </tr>
+          {% endfor %}
+         
+        </tbody>
+      </table>
+      {% else %}
+      <h1 style="text-align: center">Your Book List Empty</h1>
+      {% endif %}
+</div>
+
+{% endblock %}
