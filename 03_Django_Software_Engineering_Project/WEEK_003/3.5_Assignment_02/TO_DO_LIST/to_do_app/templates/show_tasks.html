@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="width: 60%; height: 500px; margin: auto;">
+    <h1 style="text-align: center">Your Task List </h1>
+    {% if tasks %}
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Tittle</th>
+            <th scope="col">Description</th>
+            <th scope="col">Status </th>
+            <th scope="col">Actions</th>
+            
+            
+          </tr>
+        </thead>
+        <tbody>
+           
+            {% for item in tasks %}
+          <tr>
+            <td>{{item.taskTitle}}</td>
+            <td>{{item.taskDescription}}</td>
+            <td>{% if item.is_completed == False %} Incomplete {% else %} complete {% endif %}</td>
+            <td><a href="{% url 'edit' pk=item.id %}" type="button" class="btn btn-danger btn-sm">Edit</a> <a href="{% url 'delete' pk=item.id %}" type="button" class="btn btn-warning btn-sm">Delete</a> <a href="{% url 'complete' pk=item.id %}" type="button" class="btn btn-success btn-sm">Complete</a></td>
+          </tr>
+          {% endfor %}
+         
+        </tbody>
+      </table>
+      {% else %}
+      <h1 style="text-align: center">Your Task List Empty</h1>
+      {% endif %}
+</div>
+
+{% endblock %}
