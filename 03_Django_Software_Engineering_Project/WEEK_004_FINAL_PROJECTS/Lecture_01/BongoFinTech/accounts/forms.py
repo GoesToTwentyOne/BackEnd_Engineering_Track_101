@@ -83,10 +83,10 @@ class UserUpdateForm(forms.ModelForm):
         # jodi user er account thake 
         if self.instance:
             try:
-                # user_account = self.instance.account
-                # user_address = self.instance.address
-                user_account = UserBankAccountModel.objects.get(user=self.instance)
-                user_address = UserAddressModel.objects.get(user=self.instance)
+                user_account = self.instance.bank_account
+                user_address = self.instance.address
+                # user_account = UserBankAccountModel.objects.get(user=self.instance)
+                # user_address = UserAddressModel.objects.get(user=self.instance)
             except UserBankAccountModel.DoesNotExist:
                 user_account = None
                 user_address = None
