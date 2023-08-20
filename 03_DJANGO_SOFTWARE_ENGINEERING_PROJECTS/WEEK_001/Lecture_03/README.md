@@ -180,7 +180,87 @@ About
 <h1>About Page</h1>
 {% endblock content %}
 ```
+Sure, let's simplify the documentation while retaining the key points:
 
+---
+
+# Template Tags Documentation
+
+## Introduction
+
+This documentation explains how to use custom template tags in the `templatetags` folder of your Django app to extend template functionality.
+
+## Installation
+
+1. Create a folder named `templatetags` in your Django app's main directory.
+2. Add Python files with your custom template tags in this folder.
+3. Import required modules from Django's template libraries at the beginning of your Python files.
+
+## Custom Template Filter
+
+A custom template filter lets you modify template variable content. Here's how:
+
+1. Define a Python function to perform the transformation.
+2. Register the function using `register.filter`.
+3. Use the filter in templates: `{{ variable | filter_name:argument }}`.
+
+Example:
+```python
+from django import template
+
+register = template.Library()
+
+def my_template(value, args):
+    if args == 'change':
+        value = "Alex Goot"
+        return value
+    if args == 'title':
+        return value.title()
+
+register.filter('change_name', my_template)
+```
+
+Usage in templates:
+```html
+{{ "hello world" | change_name:"change" }} <!-- Outputs: "Alex Goot" -->
+{{ "this is a test" | change_name:"title" }} <!-- Outputs: "This Is A Test" -->
+```
+
+## Custom Inclusion Tag
+
+A custom inclusion tag lets you include dynamic content in templates. Here's how:
+
+1. Define a Python function to generate the content as a dictionary.
+2. Use `register.inclusion_tag` to associate the function with a template.
+3. Include the tag in templates: `{% inclusion_tag_name %}`.
+
+Example:
+```python
+from django import template
+from django.template.loader import get_template
+
+register = template.Library()
+
+def show_courses():
+    courses = [
+        {'Id': 101, 'course': 'c++', 'Teacher': 'Alex Smith'},
+        {'Id': 102, 'course': 'databases', 'Teacher': 'Gorkie'},
+        {'Id': 103, 'course': 'django', 'Teacher': 'Bruno'}
+    ]
+    return {'courses': courses}
+
+courses_template = get_template('my_app/courses.html')
+register.inclusion_tag(courses_template)(show_courses)
+```
+
+Usage in templates:
+```html
+{% show_courses %}
+```
+
+## Conclusion
+
+Custom template tags enhance your Django templates with personalized features. By following this guide, you can create custom filters and inclusion tags to tailor your application's presentation layer.
 
 
 ## Conclusion
