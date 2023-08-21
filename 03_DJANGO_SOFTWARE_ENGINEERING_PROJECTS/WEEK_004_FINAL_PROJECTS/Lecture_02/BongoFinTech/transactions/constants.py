@@ -1,12 +1,12 @@
 DEPOSIT = 1
-WITHDRAW = 2
+WITHDRAWAL = 2
 LOAN = 3
 LOAN_PAID = 4
 
-
-TRANSACTION_TYPE=(
-    ('DEPOSIT','Deposit'),
-    ('WITHDRAW','Withdraw'),
-    ('LOAN','Loan'),
-    ('LOAN_PAID','Loan_Paid'),
+TRANSACTION_TYPE = (
+    (DEPOSIT, 'Deposite'),
+    (WITHDRAWAL, 'Withdrawal'),
+    (LOAN, 'Loan'),
+    (LOAN_PAID, 'Loan Paid'),
+    
 )
