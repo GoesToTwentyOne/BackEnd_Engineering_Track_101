@@ -3,7 +3,7 @@ from . models import Product
 # Register your models here.
 # admin.site.register(Product)
 
-class ProductAdmin(admin.ModelAdmin): # admin panel customize korte modeladmin use kori
+class ProductAdmin(admin.ModelAdmin): 
      list_display = ['product_name', 'price', 'category','stock' ,'created_date', 'modified_date', 'is_available']
      
      prepopulated_fields = {'slug' : ('product_name',)}
