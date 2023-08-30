@@ -88,10 +88,12 @@
                   <i class="fa fa-bars"></i> All category
                 </button>
                 <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#"
-                    >Machinery / Mechanical Parts / Tools
+                  {% for category in categories%}
+                  <a class="dropdown-item" href="{% url 'products_by_category' category_slug=category.slug %}"
+                    >{{category.category_name}}
                   </a>
-                  <a class="dropdown-item" href="#"
+                  {% endfor %}
+                  {% comment %} <a class="dropdown-item" href="#"
                     >Consumer Electronics / Home Appliances
                   </a>
                   <a class="dropdown-item" href="#">Auto / Transportation</a>
@@ -103,7 +105,7 @@
                   </a>
                   <a class="dropdown-item" href="#"
                     >Beauty & Personal Care / Health
-                  </a>
+                  </a> {% endcomment %}
                 </div>
               </div>
               <!-- category-wrap.// -->
@@ -130,16 +132,29 @@
               <!-- search-wrap .end// -->
             </div>
             <!-- col.// -->
+            {% if request.user.is_authenticated %}
             <div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
               <div class="d-flex justify-content-end mb-3 mb-lg-0">
                 <div class="widget-header">
-                  <small class="title text-muted">Welcome guest!</small>
+                  <small class="title text-muted">Welcome {{request.user.first_name}}!</small>
                   <div>
-                    <a href="{% url 'login' %}">Sign in</a>
+                    <a href="{% url 'profile' %}">Profile</a>
                     <span class="dark-transp"> | </span>
-                    <a href="{% url 'register' %}"> Register</a>
+                    <a href="{% url 'logout' %}"> Logout </a>
                   </div>
                 </div>
+                {% else %}
+                <div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
+                  <div class="d-flex justify-content-end mb-3 mb-lg-0">
+                    <div class="widget-header">
+                      <small class="title text-muted">Welcome guest!</small>
+                      <div>
+                        <a href="{% url 'login' %}">Sign in</a>
+                        <span class="dark-transp"> | </span>
+                        <a href="{% url 'register' %}"> Register</a>
+                      </div>
+                    </div>
+                  {% endif %}
                 <a href="{% url 'cart' %}" class="widget-header pl-3 ml-3">
                   <div class="icon icon-sm rounded-circle border">
                     <i class="fa fa-shopping-cart"></i>
