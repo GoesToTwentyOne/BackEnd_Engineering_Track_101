@@ -87,7 +87,13 @@ For static files:
 For media files:
 
 ```html
-<img src="{{ object.image.url }}" alt="User Image">
+<img src="{{ object.image.url }}" alt="User Image"> 
+
+```
+For link url:
+
+```html
+<a href="{% url 'some-url-name' v1 v2 %}" >Some</a>
 
 ```
 
@@ -226,7 +232,7 @@ Usage in templates:
 {{ "this is a test" | change_name:"title" }} <!-- Outputs: "This Is A Test" -->
 ```
 
-## Custom Inclusion Tag
+## Custom Inclusion Tag template Tag
 
 A custom inclusion tag lets you include dynamic content in templates. Here's how:
 
@@ -251,6 +257,29 @@ def show_courses():
 
 courses_template = get_template('my_app/courses.html')
 register.inclusion_tag(courses_template)(show_courses)
+```
+
+```html
+{% load first_tags%}
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Teacher</th>
+      </tr>
+    </thead>
+    <tbody>
+{% for course in courses %}
+      <tr>
+        <th scope="row">1</th>
+        <td>{{course.Id}}</td>
+        <td>{{course.course}}</td>
+        <td>{{course.Teacher}}</td>
+      </tr>
+{% endfor %}
+</tbody>
+</table>
 ```
 
 Usage in templates:
