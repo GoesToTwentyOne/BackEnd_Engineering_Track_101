@@ -1,0 +1,41 @@
+- Introduction to Django
+- Python and Vs Code Installation
+- Introduction to Virtual Environment
+- Django Installation
+- Creating a Django Project
+- Project Directory Structure
+- Working with urls.py and views.py
+- Creating an App
+- Working With Django Template
+  - 2.1 Creating Project And Applications
+  - 2.2 Simple Page Navigation Part - 1
+  - 2.3 Simple Page Navigation Part - 2
+  - 2.4 Rendering Template From Project Folder
+  - 2.5 Rendering Template From Application
+  - 2.6 Django Template Language - if-else
+  - 2.7 Django Template Language - For Loop
+  - 2.8 Django Template Language - Filtering
+- More About Django Template
+  - 3.1 Working with Static Files Inside Project
+  - 3.2 Working with Static Files Inside Application
+  - 3.3 Static Files Vs Media Files Configuration
+  - 3.4 Adding Bootstrap to our Django Project
+  - 3.5 Using Url tag in our Django Project
+  - 3.6 Introduction to Template Inheritance
+  - 3.7 Template Inheritance - Code
+  - 3.8 Creating Custom Template and Template Tags
+- Working with Forms in Django
+  - 4.0 Important Discussion
+  - 4.1 Working with HTML Forms in Django
+  - 4.2 More About HTML Form in Django
+  - 4.3 Introduction to Django Built-in Forms
+  - 4.4 Adding Crispy Forms in Django
+  - 4.5 Some Built-in Form Fields Part - 1
+  - 4.6 Some Built-in Form Fields Part - 2
+  - 4.7 How to Upload File in Django Form
+  - 4.8 Django Form Attributes and Widgets
+  - 4.9 Cleaning and Validating Form Data
+  - 4.10 Built-in Form Validators
+  - 4.11 Password Matching Project
+
+This expanded table of contents includes additional sections for cleaning and validating form data, built-in form validators, and a password matching project.
