@@ -20,12 +20,10 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ['username', 'first_name', 'last_name', 'email']
 ```
-## Sign UP Input
 ```python
+# Sign UP Input
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
-
-
 {% block content %}
 {% if messages %}
 {% for message in messages %}
@@ -58,8 +56,8 @@ class SignUpForm(UserCreationForm):
 
 {% endblock %}
 ```
-## Sign up view
 ```python
+## Sign up view
 def signup(request):
     if not request.user.is_authenticated:
         if request.method =='POST':
@@ -104,8 +102,9 @@ def user_login(request):
     else:
         return redirect('profile')
 ```
-## Login Input
+
 ```python
+# Login Input
 {% if form.non_field_errors %}
     {% for error in form.non_field_errors %}
     <div class="alert alert-danger" role="alert">
@@ -146,6 +145,7 @@ def change_password(request):
 
 ```
 ```python
+# password change form
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
@@ -204,7 +204,7 @@ def password_change_set(request):
     else:
         return redirect('login')
 ```
-## Chage User Data | Update Profile
+## Change User Data | Update Profile
 ```python
 ## build in userchange form
 class Change_User_Data(UserChangeForm):
