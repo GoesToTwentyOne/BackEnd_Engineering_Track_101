@@ -30,6 +30,8 @@ def show(request):
     else:
         form = studentForm()
     return render(request, 'home.html', context={'form': form})
+
+
 #one to one relationship
 def show_data_one_to_one(request):
     passt=Passport.objects.get(passport_number=454578)

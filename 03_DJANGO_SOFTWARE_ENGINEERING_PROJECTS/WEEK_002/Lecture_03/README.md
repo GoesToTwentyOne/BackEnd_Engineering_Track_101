@@ -249,3 +249,109 @@ The general rules are:
 
 If you are mirroring an existing model or database table and don’t want all the original database table columns, use Meta.managed=False. That option is normally useful for modeling database views and tables not under the control of Django.
 If you are wanting to change the Python-only behavior of a model, but keep all the same fields as in the original, use Meta.proxy=True. This sets things up so that the proxy model is an exact copy of the storage structure of the original model when data is saved.
+
+
+# Model Relationships in django 
+## One-to-One Relationship
+In this section, you define two Django models, `Person` and `Passport`, to represent a one-to-one relationship between a person and their passport. The `Person` model has fields for name, age, city, and email. The `Passport` model has a one-to-one relationship with `Person` using `OneToOneField`. This means that each passport is associated with exactly one person.
+```python
+#one to one relationship
+class Person(models.Model):
+    name = models.CharField(max_length=45)
+    age = models.IntegerField()
+    city=models.CharField(max_length=45)
+    email=models.CharField(max_length=35)
+
+    def __str__(self) -> str:
+        return f"{self.name}"
+class Passport(models.Model):
+    person_user=models.OneToOneField(to="Person",on_delete=models.CASCADE,related_name='passport')
+    passport_type=models.CharField(max_length=20)
+    passport_number=models.IntegerField()
+    page=models.IntegerField()
+    validity=models.IntegerField()
+    regional_office=models.CharField(max_length=45)
+```
+
+
+## One-to-Many Relationship
+In this section, you define two Django models, `Student` and `Library`, to represent a one-to-many relationship between students and the library. The `Student` model has fields for name, ID, address, and section. The `Library` model has a foreign key relationship with `Student` using `ForeignKey`. This means that each library entry is associated with one student, but a student can have multiple library entries.
+```python
+# one to many relationship
+class Student(models.Model):
+    name = models.CharField(max_length=45)
+    id = models.IntegerField(primary_key=True)
+    address = models.TextField(max_length=50)
+    section = models.CharField(max_length=45)
+    def __str__(self) -> str:
+        return f"{self.name}"
+class Library(models.Model):
+    # student_user=models.ForeignKey(to=Student, on_delete=models.SET_NULL,null=True)
+    student_user=models.ForeignKey(to=Student, on_delete=models.CASCADE,related_name='student')
+    book_name=models.CharField(max_length=45)
+    who_take_book=models.IntegerField()
+```
+
+
+## Many-to-Many Relationship
+In this section, you define two Django models, `Studentinfo` and `Teacherinfo`, to represent a many-to-many relationship between students and teachers. The `Studentinfo` model has fields for name, ID, address, and current class. The `Teacherinfo` model has a many-to-many relationship with `Studentinfo` using `ManyToManyField`. This means that each teacher can be associated with multiple students, and each student can be associated with multiple teachers.
+```python
+
+# many to many relationship
+# many to many relationship
+class Studentinfo(models.Model):
+    name=models.CharField(max_length=45)
+    id =models.IntegerField(primary_key=True)
+    address=models.TextField(max_length=50)
+    cur_class=models.CharField(max_length=20)
+    def __str__(self):
+        return self.name
+    def teacher_list(self):
+        return ",".join([str(i) for i in self.teacherinfo.all()])
+class Teacherinfo(models.Model):
+    student_user=models.ManyToManyField(to=Studentinfo,related_name="teacherinfo")
+    name=models.CharField(max_length=45)
+    address=models.TextField(max_length=50)
+    subject=models.CharField(max_length=45)
+    salary=models.IntegerField()
+    phone=models.CharField(max_length=11)
+    def __str__(self) -> str:
+        return f"{self.name}"
+
+    def student_list(self):
+        return ",".join([str(i) for i in self.student_user.all()])
+
+```
+## Relationship Views
+You have provided two Django views to demonstrate how to retrieve data from the defined relationships:
+
+### show_data_one_to_one
+This view is meant to demonstrate the retrieval of data in a one-to-one relationship. However, there's a minor issue in the code where you're trying to access `person.city`, which is incorrect. You should access it as `person.person_user.city` because `person` is related to `Passport`, and `city` is a field of the `Person` model.
+```python
+#one to one relationship
+def show_data_one_to_one(request):
+    passt=Passport.objects.get(passport_number=454578)
+    person=passt.passport.all()
+    print(person.city)
+# many to many relations
+def show_data(request):
+    # one teacher has students
+    teacher = Teacherinfo.objects.get(name="Hasan")
+    students=teacher.student_user.all()
+    for student in students:
+        print(student.name)
+
+    # one student has teachers
+    student = Studentinfo.objects.get(name="Nihad")
+    #teachers = student.teacherinfo_set.all()
+    teachers = student.teacherinfo.all()
+    for teacher in teachers:
+        print(teacher.name)
+    return render(request, 'show_data.html')
+
+```
+
+
+
+
+
