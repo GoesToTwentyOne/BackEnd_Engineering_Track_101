@@ -8,15 +8,13 @@ In our Django project, we have defined a model called `Student` in the following
 
 ```python
 from django.db import models
-
 class Student(models.Model):
-    name = models.CharField(max_length=25)
-    roll = models.IntegerField(primary_key=True)
-    address = models.TextField()
-    address2 = models.TextField(default="Dhaka")
-
+    name=models.CharField(max_length=25)
+    roll=models.IntegerField(primary_key=True)
+    address=models.TextField()
+    address2=models.TextField(default="Dhaka")
     def __str__(self) -> str:
-        return f"Roll: {self.roll} -- Name: {self.name} -- Address: {self.address}"
+        return f" Roll: {self.roll} -- Name: {self.name} -- Address: {self.address}"
 ```
 
 This `Student` model represents student information with fields such as `name`, `roll`, `address`, and `address2`.
@@ -56,15 +54,34 @@ This URL pattern allows us to delete a student record by specifying the roll num
 In addition to the `Student` model, we have defined a model called `studentModel` and a ModelForm called `studentForm` for handling student data:
 
 ```python
-class studentModel(models.Model):
-    name = models.CharField(max_length=45)
-    roll = models.IntegerField(primary_key=True)
-    father_name = models.CharField(max_length=45)
-    mother_name = models.CharField(max_length=45)
-    address = models.TextField()
-
+from . import models
 class studentForm(forms.ModelForm):
-    # ... Form fields, labels, widgets, help texts, and error messages
+    class Meta:
+        model=models.studentModel
+        # fields=['name','rollno','email','password']
+        fields='__all__'
+        exclude=['password']
+        labels={
+            'name': 'Student Name',
+            'email': 'Student Email'
+        }
+        widgets={
+            'name': forms.TextInput(attrs={'class':'form-control'}),
+            'rollno': forms.TextInput(attrs={'class':'form-control'}),
+            'email': forms.EmailInput(attrs={'class':'form-control'}),
+            'password': forms.PasswordInput(attrs={'class':'form-control'}),
+        }
+        help_texts={
+            'name': 'Student Name',
+            'email': 'Student Email',
+            'password': '<PASSWORD>'
+        }
+        error_messages={
+            'name': {
+              'required': 'Student Name is required',
+              'max_length': 'Student Name must be less than 100 characters'
+            },
+        }
 ```
 
 The `studentForm` is used for data input and validation, while the `studentModel` defines the structure of the student data.
@@ -81,6 +98,8 @@ def home(request):
             form.save()
             print(form.cleaned_data)
             return render(request, 'home.html', context={'form': form})
+        # else:
+        #     return render(request, 'my_app/validateForm.html', context={'form': form})
     else:
         form = studentForm()
     return render(request, 'home.html', context={'form': form})
