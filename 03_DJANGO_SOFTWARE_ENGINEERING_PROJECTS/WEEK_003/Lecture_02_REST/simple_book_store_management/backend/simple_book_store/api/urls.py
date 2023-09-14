@@ -15,5 +15,7 @@ urlpatterns = [
     # METHOD 2 Generic VIEW
     # path('books/',views.BookListCreateAPIView.as_view(), name="bookstore"), #get /post
     # path('books/<int:pk>/',views.BookRetrieveUpdateDestroyAPIView.as_view(), name="bookstore") #update Delete
+    
+    # METHOD 3
     path('', include(router.urls)),
 ]

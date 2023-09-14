@@ -73,10 +73,7 @@ class BookRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView): #
     serializer_class = BookStoreSerializer
     
 '''
-
-class BookViewSet(viewsets.ModelViewSet):
-    """
-    This viewset automatically provides `list` and `retrieve` actions.
-    """
+# METHOD 3  VIEWSET
+class BookViewSet(viewsets.ModelViewSet): #get,post,update,delete
     queryset = BookStoreModel.objects.all()
     serializer_class = BookStoreSerializer
